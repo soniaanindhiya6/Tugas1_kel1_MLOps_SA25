@@ -13,6 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: iterative/setup-cml@v2
+
+      - name: Check-Makefile
+        run: |
+          echo "Working dir: $(pwd)"
+          echo "Files:"
+          ls -la
+          
       - name: Install Packages
         run: make install
       - name: Format
