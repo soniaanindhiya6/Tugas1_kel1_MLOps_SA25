@@ -2,3 +2,5 @@ credit_risk_dataset.zip
 x_test.csv
 y_test.csv
 credit_risk_score.csv
+Model/*
+*.skops
