@@ -1,24 +1,35 @@
-name: CISS
+name: CI
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
   
-permissions: write-all
+permissions:
+  contents: write
+  
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: iterative/setup-cml@v2
+
+      - name: Check-Makefile
+        run: |
+          echo "Working dir: $(pwd)"
+          echo "Files:"
+          ls -la
+          
       - name: Install Packages
         run: make install
+        
       - name: Format
         run: make format
+        
       - name: Train
         run: make train
+        
       - name: Evaluation
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
