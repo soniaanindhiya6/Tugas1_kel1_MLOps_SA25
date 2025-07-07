@@ -1,12 +1,13 @@
-name: CISS
+name: CI
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
   workflow_dispatch:
   
-permissions: write-all
+permissions:
+  contents: write
+  
 jobs:
   build:
     runs-on: ubuntu-latest
