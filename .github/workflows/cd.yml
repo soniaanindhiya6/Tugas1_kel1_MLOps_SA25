@@ -1,0 +1,32 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main  # Jalankan hanya saat push ke main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install huggingface_hub CLI
+        run: |
+          pip install -U "huggingface_hub[cli]"
+
+      - name: Login to Hugging Face
+        run: |
+          huggingface-cli login --token ${{ secrets.HF_TOKEN }} --add-to-git-credential
+
+      
